@@ -1,3 +1,4 @@
+require('./server.js');
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 require('dotenv').config();
 
@@ -103,5 +104,6 @@ client.on('interactionCreate', async interaction => {
         }
     }
 });
+
 
 client.login(process.env.DISCORD_TOKEN);
