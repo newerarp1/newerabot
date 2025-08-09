@@ -66,10 +66,10 @@ client.on('messageCreate', async (message) => {
         { label: 'قوانين الديسكورد', value: 'discord', emoji: '💬' },
         { label: 'القوانين العامة', value: 'general', emoji: '📜' },
         { label: 'المناطق الآمنة', value: 'safezones', emoji: '🛡️' },
-        { label: 'قوانين القتل والجريمة', value: 'crime', emoji: '🚔' },
+        { label: 'قوانين القتل والجريمة', value: 'crime', emoji: '💬' },
         { label: 'قوانين السرقات والرهائن', value: 'theft', emoji: '💊' },
         { label: 'قوانين العداوة', value: 'enmity', emoji: '💬' },
-        { label: 'قوانين التفاعل مع الشرطة', value: 'police', emoji: '💬' },
+        { label: 'قوانين التفاعل مع الشرطة', value: 'police', emoji: '🚔' },
         { label: 'قوانين صناعة المحتوى', value: 'stremar', emoji: '💬' }
           
       ]);
@@ -152,3 +152,4 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
