@@ -77,7 +77,7 @@ client.on('messageCreate', async (message) => {
     const row = new ActionRowBuilder().addComponents(select);
 
     const embed = new EmbedBuilder()
-      .setTitle('MysteryTown RP')
+      .setTitle('NewEra RP')
       .setDescription('اختر فئة لعرض القوانين بشكل خاص لك')
       .setColor(0xFF7A00);
 
@@ -152,4 +152,5 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
 
