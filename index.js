@@ -82,6 +82,7 @@ client.on('messageCreate', async (message) => {
       .setTitle('NewEra RP')
       .setDescription('جميع القوانين التابعة لسيرفر NewEra RP \n نرجوا منك إتباع جميع القوانين لكي لا يتم محاسبتك')
       .setColor(0xFF7A00);
+    .setImage('https://cdn.discordapp.com/attachments/1346320702772613297/1403936450587791562/benner_gif.gif?ex=68995d35&is=68980bb5&hm=58481452818f321ec6ea6721c8c426d6c029777d9b75c83cf209f2e4dc270451&')
 
     await message.channel.send({ embeds: [embed], components: [row] });
   }
@@ -154,6 +155,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
 
 
 
