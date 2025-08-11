@@ -145,7 +145,7 @@ client.on('interactionCreate', async (interaction) => {
         .setDescription(announcementText)
         .setFooter({ text: 'Newera Management', iconURL: 'https://cdn.discordapp.com/attachments/1346320702772613297/1401750175978094693/avtar-ne.png' });
 
-      await channel.send('||@everyone||');
+      
       await channel.send({ embeds: [announcementEmbed] });
       return interaction.reply({ content: 'تم إرسال التعميم بنجاح', ephemeral: true });
     } catch (err) {
@@ -156,6 +156,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
 
 
 
