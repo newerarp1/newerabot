@@ -3,8 +3,7 @@ const fs = require('fs');
 const {
   Client, GatewayIntentBits, EmbedBuilder,
   ActionRowBuilder, ButtonBuilder, ButtonStyle,
-  ModalBuilder, TextInputBuilder, TextInputStyle,
-  StringSelectMenuBuilder, PermissionsBitField
+  PermissionsBitField
 } = require('discord.js');
 require('dotenv').config();
 
@@ -29,7 +28,7 @@ function saveCounters() {
 
 // ====== RULES DATA ======
 const RULES = {
- discord: "قوانين الديسكورد:\n- يمنع التطرق لأي موضوع سياسي \n- يمنع التطرق لأي موضوع ديني \n- يمنع العنصرية بأي شكل من الأشكال \n- يمنع التواصل مع أي إداري في الخاص فيما يخص أمور السيرفر \n- يجب احترام جميع الإداريين \n- يمنع السب والشتم بجميع أشكاله  \n- ( . ) يمنع إرسال العبارات الغير مفهومه في الشات العام مثل  \n- يمنع إرسال أي رابط في الشات العام \n- يمنع تعدد الحسابات بأي شكل من الأشكال ",  
+   discord: "قوانين الديسكورد:\n- يمنع التطرق لأي موضوع سياسي \n- يمنع التطرق لأي موضوع ديني \n- يمنع العنصرية بأي شكل من الأشكال \n- يمنع التواصل مع أي إداري في الخاص فيما يخص أمور السيرفر \n- يجب احترام جميع الإداريين \n- يمنع السب والشتم بجميع أشكاله  \n- ( . ) يمنع إرسال العبارات الغير مفهومه في الشات العام مثل  \n- يمنع إرسال أي رابط في الشات العام \n- يمنع تعدد الحسابات بأي شكل من الأشكال ",  
   important: "القوانين المهمه:\n- العمر المطلوب لدخول السيرفر 18 سنة فما فوق \n- يجب ان يكون اسم الكاراكتر واقعي ولا يبدا ب (ابو) \n- الحرص على جودة المايك \n- يجب تشغيل برنامج التصوير مع الصوت اثناء اللعب ( 20د ) ",
   general: "القوانين العامة:\n- الالتزام بالدور : يجب أن تتصرف شخصيتك في اللعبة كما لو كانت حقيقية ، أي لا تخرج عن الدور أو تتحدث عن أشياء خارج اللعبة (مثل قول اللعبة لاق أثناء مشهد RP) \n- كسر الشخصية (Metagaming) : لا تستخدم معلومات حصلت عليها خارج اللعبة (مثل الديسكورد أو البثوث) داخل اللعبة \n- يمنع القتل العشوائي (RDM) \n- يمنع استخدام المركبات كسلاح (VDM) \n- إجبار الدور التمثيلي (Powergaming ) : مثال إغلاق أي باب بالمركبة \n- الهروب من السيناريوهات لا تخرج من اللعبة أثناء مشهد RP للهروب من الموقف (مثل الاعتقال أو الخسارة) \n- في حال اسقطت يجب عليك التألم لا يمكنك الكلام بطلاقه فيجب عليك التصرف كما لو كنت مصاباً \n- يمنع اهانة الشخص المسقط بأي حال من الأحوال \n- يمنع تقليد ملابس الشرطة اوالاسعاف \n- لا يحق لك تحريك الجثه الا بغرض المساعده \n- يمنع التحلل في سيناريو قائم \n- يمنع التدخل في سيناريو قائم \n- الشخصنه ممنوعه منعا باتا بجميع انواعها \n- يمنع منعا باتا استدراج الشرطة او خطف شرطي اثناء استيقاف مروري \n- يمنع منعا باتا التعرض للمسعف مهما كانت الضروف ومن يخالف ذلك يعرضة الى الباند \n- يمنع استخدام الجرافيكس والملفات الغير واقعيه بكل انواعها \n- يمنع سرقة المعدات الشرطة أو الحكومية بـ جميع أنواعها \n- يمنع التحدث بالسياسه والاعراض والدين وايضا المضايقات \n- يمنع تقليد الكركترات والاسماء الموجوده بالسيرفر بأي طريقة كانت \n- يمنع دخول البيت او الشقه اثناء السيناريو \n- يمنع إرتداء او إستعمال اي خوذة اثناء مشاركتك في اي طلق ناري \n- يمنع العودة للسيناريو بعد الإسقاط بأي شكل من الأشكال \n- الكذب بالمسطلحات التالية { سحر او باخذ حبه او صداع والخ } يعرضك للمحاسبة الادارية \n- عند حدوث اعادة تشغيل للسيرفر { اعصار } وكنت تحت رهن الاعتقال يجب عليك الرجوع وتسليم نفسك لمركز \n- يجب الالتزام بالذوق العام في الملابس بشكل كامل \n- لا يسمح بإرتداء عدة الغوص خارج البحر ومن يخالف ذلك سيتم محاسبته \n- يمنع الإحتماء بالمناطق الأمنة \n- يمنع تقليل الاحترام لأي لاعب أو السب والشتم و القذف لأي سبب من الاسباب ",
   safezones: "المناطق الآمنة:\n- مركز الشرطة .\n- المستشفى \n- الشقق العامة .\n- المطاعم و المقاهي \n- الورش .\n- مناطق الوظائف \n- مركز المدينة \n- معارض السيارات \n- حجز المركبات \n- الكازينو إلا في حالة سرقته \n- تشمل جميع مرافقها ",
@@ -39,7 +38,6 @@ const RULES = {
   police: "قوانين التفاعل مع الشرطة:\n- الاحترام المتبادل : لا تسيء إلى اللاعبين الآخرين سواء داخل اللعبة أو خارجها \n- عدم تحدي الشرطة بطريقة غير واقعية : إذا تمت ملاحقتك، يجب أن يكون لديك سبب منطقي للهروب وعدم التصرف بطريقة انتحارية أو غير منطقية \n- يمنع الاتصال على الشرطة بعد هروبك فهذا فعل غير منطقي ولا يسمح به \n- يمنع افتعال أي عمل مع الشرطة لغرض المطاردة ",
   stremar: "قوانين صناعة المحتوى:\n-  NE! وضع اختصار السيرفر في عنوان البث \n- لا يقل عدد البثوث عن 3 بثوث أسبوعيا \n- يمنع نشر محتوى مسيء أو عنصري في الديسكورد أو داخل اللعبة \n- يمنع مناقشة أمور السيرفر في البث "
 };
-
 
 // ====== ROLE & CATEGORY IDs ======
 const ROLES = {
@@ -102,20 +100,21 @@ async function sendTicketPanel(channel, interviewOnly = false) {
     .setImage('https://cdn.discordapp.com/attachments/1346320702772613297/1403936450587791562/benner_gif.gif')
     .setColor(0xFF7A00);
 
-  const row = new ActionRowBuilder();
-
-  Object.entries(ticketTypes).forEach(([key, cfg]) => {
-    if (interviewOnly && key !== 'active') return;
-    if (!interviewOnly && key === 'active') return;
-    row.addComponents(
+  const buttons = Object.entries(ticketTypes)
+    .filter(([key]) => interviewOnly ? key === 'active' : key !== 'active')
+    .map(([key, cfg]) =>
       new ButtonBuilder()
         .setCustomId(`create_ticket_${key}`)
         .setLabel(cfg.label)
         .setStyle(ButtonStyle.Primary)
     );
-  });
 
-  await channel.send({ embeds: [embed], components: [row] });
+  const rows = [];
+  for (let i = 0; i < buttons.length; i += 5) {
+    rows.push(new ActionRowBuilder().addComponents(buttons.slice(i, i + 5)));
+  }
+
+  await channel.send({ embeds: [embed], components: rows });
 }
 
 client.once('ready', () => {
@@ -124,36 +123,27 @@ client.once('ready', () => {
 
 client.on('messageCreate', async (msg) => {
   if (msg.author.bot) return;
-
   if (msg.content === '-tickets') sendTicketPanel(msg.channel, false);
   if (msg.content === '-interview') sendTicketPanel(msg.channel, true);
 
   if (msg.content.startsWith('-rules')) {
-    for (const [title, text] of Object.entries(RULES)) {
-      const embed = new EmbedBuilder()
-        .setTitle(title)
-        .setDescription(text)
-        .setColor(0x00AE86);
-      await msg.channel.send({ embeds: [embed] });
+    const parts = msg.content.split(' ');
+    const ruleKey = parts[1];
+    if (RULES[ruleKey]) {
+      const embed = new EmbedBuilder().setTitle(`📜 ${ruleKey} Rules`).setDescription(RULES[ruleKey]).setColor(0xFF7A00);
+      msg.channel.send({ embeds: [embed] });
     }
   }
 
   if (msg.content.startsWith(PREFIX)) {
-    const modal = new ModalBuilder()
-      .setCustomId('annonModal')
-      .setTitle('Send Announcement');
-
-    const annInput = new TextInputBuilder()
-      .setCustomId('announcement')
-      .setLabel('Your Announcement')
-      .setStyle(TextInputStyle.Paragraph);
-
-    modal.addComponents(new ActionRowBuilder().addComponents(annInput));
-    await msg.showModal(modal);
+    const announcement = msg.content.slice(PREFIX.length).trim();
+    if (announcement) {
+      const embed = new EmbedBuilder().setTitle('📢 إعلان').setDescription(announcement).setColor(0xFF7A00);
+      msg.channel.send({ embeds: [embed] });
+    }
   }
 });
 
-// Ticket handling
 client.on('interactionCreate', async (i) => {
   if (i.isButton() && i.customId.startsWith('create_ticket_')) {
     const type = i.customId.replace('create_ticket_', '');
@@ -197,7 +187,10 @@ client.on('interactionCreate', async (i) => {
     const msg = await ch.messages.fetch({ limit: 1 }).then(m => m.first());
     if (!msg) return;
     const embed = EmbedBuilder.from(msg.embeds[0]).setColor(0xFFFF00).setFooter({ text: `Claimed by ${i.user.tag}` });
-    await msg.edit({ embeds: [embed] });
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setCustomId(`close_${chId}_${Object.keys(ticketTypes).find(t => ticketTypes[t].cat === ch.parentId)}`).setLabel('Close').setStyle(ButtonStyle.Danger)
+    );
+    await msg.edit({ embeds: [embed], components: [row] });
     await i.reply({ content: 'تم claim التذكرة', ephemeral: true });
   }
 
@@ -207,12 +200,6 @@ client.on('interactionCreate', async (i) => {
     if (!ch) return;
     await ch.setParent(ticketTypes[type].closed);
     await i.reply({ content: 'تم إغلاق التذكرة', ephemeral: true });
-  }
-
-  if (i.isModalSubmit() && i.customId === 'annonModal') {
-    const announcement = i.fields.getTextInputValue('announcement');
-    await i.channel.send(announcement);
-    await i.reply({ content: 'تم إرسال الإعلان', ephemeral: true });
   }
 });
 
