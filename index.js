@@ -154,8 +154,10 @@ client.on('interactionCreate', async (interaction) => {
     }
   }
 });
-
+console.log("DISCORD_TOKEN موجود:", !!process.env.DISCORD_TOKEN);
+console.log("طول التوكن:", process.env.DISCORD_TOKEN?.length || 0);
 client.login(process.env.DISCORD_TOKEN);
+
 
 
 
